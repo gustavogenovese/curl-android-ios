@@ -30,24 +30,11 @@ else
 	echo "Omitting pre-configure.sh"
 fi
 
-if [ ! -f "$CURLPATH/lib/vtls/curl_setup.h" ]; then
-  cd $CURLPATH/lib/vtls
-  ln -s ../curl_setup.h
-  cd $SCRIPTPATH
-fi
-
 $NDK_ROOT/ndk-build -C $SCRIPTPATH
 EXITCODE=$?
-
-rm "$CURLPATH/lib/vtls/curl_setup.h"
-
 if [ $EXITCODE -ne 0 ]; then
 	echo "Error running the ndk-build program"
 	exit $EXITCODE
 fi
 
 
-#if [ ! -x "$(which wget)" ]; then
-#  echo "You don't have wget installed, please install it and try again"
-#  exit 1
-#fi

@@ -1,15 +1,16 @@
 LOCAL_PATH := $(call my-dir)
-#$(info LOCAL_PATH is $(LOCAL_PATH))
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := curl
 
-COMMON_CFLAGS := -DANDROID -isystem $(SYSROOT)/usr/include/ \
+COMMON_CFLAGS := -DANDROID \
 -Wpointer-arith -Wwrite-strings -Wunused -Winline \
 -Wnested-externs -Wmissing-declarations -Wmissing-prototypes -Wno-long-long \
 -Wfloat-equal -Wno-multichar -Wsign-compare -Wno-format-nonliteral \
 -Wendif-labels -Wstrict-prototypes -Wdeclaration-after-statement \
 -Wno-system-headers -Wno-typedef-redefinition -Wno-unused-variable -DHAVE_CONFIG_H
+
+COMMON_CFLAGS += -I$(NDK_PATH)/platforms/$(TARGET_PLATFORM)/arch-arm/usr/include
 
 CSOURCES := amigaos.c asyn-ares.c asyn-thread.c base64.c bundles.c conncache.c \
            connect.c content_encoding.c cookie.c curl_addrinfo.c curl_fnmatch.c \
@@ -26,10 +27,14 @@ CSOURCES := amigaos.c asyn-ares.c asyn-thread.c base64.c bundles.c conncache.c \
            progress.c rawstr.c rtsp.c security.c select.c sendf.c share.c slist.c \
            smtp.c socks.c socks_gssapi.c socks_sspi.c speedcheck.c splay.c ssh.c \
            strdup.c strequal.c strerror.c strtok.c strtoofft.c telnet.c tftp.c \
-           timeval.c transfer.c url.c version.c warnless.c wildcard.c x509asn1.c
+           timeval.c transfer.c url.c version.c warnless.c wildcard.c x509asn1.c \
+           vtls/axtls.c vtls/curl_darwinssl.c vtls/curl_schannel.c vtls/cyassl.c \
+           vtls/gskit.c vtls/gtls.c vtls/nss.c vtls/openssl.c vtls/polarssl.c \
+           vtls/polarssl_threadlock.c vtls/qssl.c vtls/vtls.c
 
 LOCAL_SRC_FILES := $(addprefix ../../curl/lib/,$(CSOURCES))
-LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../curl/include/
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../curl/include
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../curl/lib
     
 ifeq ($(TARGET_ARCH),x86)
 	LOCAL_CFLAGS := $(COMMON_CFLAGS)
@@ -40,6 +45,3 @@ endif
 LOCAL_CPPFLAGS += -std=gnu++0x
 
 include $(BUILD_STATIC_LIBRARY)
-
-
-
