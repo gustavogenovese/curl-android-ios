@@ -1,0 +1,10 @@
+Steps to run this test app:
+1. Create a file named project.properties with the following content
+   target=android-19 #target android version
+   sdk.dir=/path/to/your/sdk/dir
+
+2. Enter "native" directory and run "ndk-build"
+
+3. Go back to the test-android-project directory and run "ant debug"
+
+4. Deploy the generated APK file to your device
