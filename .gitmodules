@@ -1,3 +1,6 @@
 [submodule "curl"]
 	path = curl
 	url = https://github.com/bagder/curl.git
+[submodule "openssl"]
+	path = openssl
+	url = https://github.com/openssl/openssl.git
