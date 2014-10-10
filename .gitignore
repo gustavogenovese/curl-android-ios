@@ -3,6 +3,6 @@ curl-compile-scripts/obj
 test-android-project/bin
 test-android-project/gen
 test-android-project/project.properties
-test-android-project/native/obj
-test-android-project/native/libs
+test-android-project/obj
+test-android-project/libs
 
