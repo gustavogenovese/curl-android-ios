@@ -5,4 +5,7 @@ test-android-project/gen
 test-android-project/project.properties
 test-android-project/obj
 test-android-project/libs
-
+.DS_Store
+*.temp
+libcurl-*.a
+xcuserdata
