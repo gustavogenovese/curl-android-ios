@@ -73,28 +73,7 @@ export LDFLAGS="-L$SCRIPTPATH/obj/local/armeabi"
             --enable-threaded-resolver \
             --enable-libgcc \
             --enable-ipv6 \
-            
-#              --disable-ares \
-#              --disable-ftp \
-#              --disable-file \
-#              --disable-gopher \
-#              --disable-ldap \
-#              --disable-ldaps \
-#              --disable-rtsp \
-#              --disable-proxy \
-#              --disable-dict \
-#              --disable-telnet \
-#              --disable-tftp \
-#              --disable-pop3 \
-#              --disable-imap \
-#              --disable-smtp \
-#              --disable-manual \
-#              --disable-libcurl-option \
-#              --disable-sspi \
-#              --disable-ntlm-wb \
-#              --disable-soname-bump \
-#              --with-random \
-#              --without-zlib
+
 EXITCODE=$?
 if [ $EXITCODE -ne 0 ]; then
   echo "Error running the configure program"
