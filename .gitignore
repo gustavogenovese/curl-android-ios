@@ -9,3 +9,4 @@ test-android-project/libs
 *.temp
 libcurl-*.a
 xcuserdata
+Makefile
