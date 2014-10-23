@@ -1,10 +1,16 @@
-CURL_COMMON_CFLAGS := -DANDROID \
+CURL_COMMON_CFLAGS := \
+  -DANDROID -DOPENSSL_NO_ASM -DOPENSSL_THREADS -D_REENTRANT \
+  -DDSO_DLFCN -DHAVE_DLFCN_H -DOPENSSL_NO_CAST -DOPENSSL_NO_CAMELLIA \
+  -DOPENSSL_NO_IDEA -DOPENSSL_NO_MDC2 -DOPENSSL_NO_SEED -DOPENSSL_NO_WHIRLPOOL\
+  -Wno-sign-compare -Wno-incompatible-pointer-types-discards-qualifiers
+CURL_COMMON_CFLAGS += \
+  -DHAVE_CONFIG_H \
   -Wpointer-arith -Wwrite-strings -Wunused -Winline \
   -Wnested-externs -Wmissing-declarations -Wmissing-prototypes -Wno-long-long \
   -Wfloat-equal -Wno-multichar -Wno-format-nonliteral \
   -Wendif-labels -Wstrict-prototypes -Wdeclaration-after-statement \
   -Wno-system-headers -Wno-typedef-redefinition -Wno-unused-variable \
-  -Wno-unused-function -DHAVE_CONFIG_H
+  -Wno-unused-function 
 CURL_CSOURCES := \
   amigaos.c asyn-ares.c asyn-thread.c base64.c bundles.c conncache.c \
   connect.c content_encoding.c cookie.c curl_addrinfo.c curl_fnmatch.c \

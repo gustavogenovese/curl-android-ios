@@ -1,6 +1,6 @@
 #!/bin/bash
 #Change this env variable to the number of processors you have
-TARGET=android-8
+TARGET=android-21
 JOBS=$(grep flags /proc/cpuinfo |wc -l)
 if [ -z "$JOBS" ]; then
   JOBS=1
@@ -81,6 +81,17 @@ if [ $EXITCODE -ne 0 ]; then
   exit $EXITCODE
 fi
 
+#Patch headers for 64-bit archs
+cd "$CURLPATH/include/curl"
+sed 's/#define CURL_SIZEOF_LONG 4/\
+#ifdef __LP64__\
+#define CURL_SIZEOF_LONG 8\
+#else\
+#define CURL_SIZEOF_LONG 4\
+#endif/'< curlbuild.h > curlbuild.h.temp
+
+mv curlbuild.h.temp curlbuild.h
+
 #Build cURL
 $NDK_ROOT/ndk-build -j$JOBS -C $SCRIPTPATH curl
 EXITCODE=$?
@@ -90,7 +101,7 @@ if [ $EXITCODE -ne 0 ]; then
 fi
 
 #Strip debug symbols and copy to the prebuilt folder
-PLATFORMS=(armeabi armeabi-v7a x86 mips)
+PLATFORMS=(arm64-v8a x86_64 mips64 armeabi armeabi-v7a x86 mips)
 DESTDIR=$SCRIPTPATH/../prebuilt-with-ssl/android
 
 for p in ${PLATFORMS[*]}; do 

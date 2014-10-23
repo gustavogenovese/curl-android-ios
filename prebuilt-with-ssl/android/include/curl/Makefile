@@ -178,20 +178,20 @@ pkgincludedir = $(includedir)/curl
 ACLOCAL = ${SHELL} "/home/gustavo/Documentos/curl_ssl_lib/curl/missing" --run aclocal-1.14
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 1
-AR = /home/gustavo/android-ndk-r10/toolchains/arm-linux-androideabi-4.6/prebuilt/linux-x86_64/bin/arm-linux-androideabi-ar
-AS = /home/gustavo/android-ndk-r10/toolchains/arm-linux-androideabi-4.6/prebuilt/linux-x86_64/bin/arm-linux-androideabi-as
+AR = /home/gustavo/android-ndk-r10c/toolchains/arm-linux-androideabi-4.6/prebuilt/linux-x86_64/bin/arm-linux-androideabi-ar
+AS = /home/gustavo/android-ndk-r10c/toolchains/arm-linux-androideabi-4.6/prebuilt/linux-x86_64/bin/arm-linux-androideabi-as
 AUTOCONF = ${SHELL} "/home/gustavo/Documentos/curl_ssl_lib/curl/missing" --run autoconf
 AUTOHEADER = ${SHELL} "/home/gustavo/Documentos/curl_ssl_lib/curl/missing" --run autoheader
 AUTOMAKE = ${SHELL} "/home/gustavo/Documentos/curl_ssl_lib/curl/missing" --run automake-1.14
 AWK = gawk
 BLANK_AT_MAKETIME = 
-CC = /home/gustavo/android-ndk-r10/toolchains/arm-linux-androideabi-4.6/prebuilt/linux-x86_64/bin/arm-linux-androideabi-gcc
+CC = /home/gustavo/android-ndk-r10c/toolchains/arm-linux-androideabi-4.6/prebuilt/linux-x86_64/bin/arm-linux-androideabi-gcc
 CCDEPMODE = depmode=gcc3
 CFLAGS = -O2 -Wno-system-headers
 CFLAG_CURL_SYMBOL_HIDING = -fvisibility=hidden
-CONFIGURE_OPTIONS = " '--host=arm-linux-androideabi' '--target=arm-linux-androideabi' '--with-ssl=/home/gustavo/Documentos/curl_ssl_lib/curl-compile-scripts/../openssl' '--enable-static' '--disable-shared' '--disable-verbose' '--enable-threaded-resolver' '--enable-libgcc' '--enable-ipv6' 'host_alias=arm-linux-androideabi' 'target_alias=arm-linux-androideabi' 'CC=/home/gustavo/android-ndk-r10/toolchains/arm-linux-androideabi-4.6/prebuilt/linux-x86_64/bin/arm-linux-androideabi-gcc' 'LDFLAGS=-L/home/gustavo/Documentos/curl_ssl_lib/curl-compile-scripts/obj/local/armeabi' 'LIBS=-lssl -lcrypto' 'CPPFLAGS=-I/home/gustavo/android-ndk-r10/platforms/android-8/arch-arm/usr/include --sysroot=/home/gustavo/android-ndk-r10/platforms/android-8/arch-arm' 'CPP=/home/gustavo/android-ndk-r10/toolchains/arm-linux-androideabi-4.6/prebuilt/linux-x86_64/bin/arm-linux-androideabi-cpp'"
-CPP = /home/gustavo/android-ndk-r10/toolchains/arm-linux-androideabi-4.6/prebuilt/linux-x86_64/bin/arm-linux-androideabi-cpp
-CPPFLAGS = -isystem /home/gustavo/android-ndk-r10/platforms/android-8/arch-arm/usr/include --sysroot=/home/gustavo/android-ndk-r10/platforms/android-8/arch-arm -I/home/gustavo/Documentos/curl_ssl_lib/curl-compile-scripts/../openssl/include -I/home/gustavo/Documentos/curl_ssl_lib/curl-compile-scripts/../openssl/include/openssl
+CONFIGURE_OPTIONS = " '--host=arm-linux-androideabi' '--target=arm-linux-androideabi' '--with-ssl=/home/gustavo/Documentos/curl_ssl_lib/curl-compile-scripts/../openssl' '--enable-static' '--disable-shared' '--disable-verbose' '--enable-threaded-resolver' '--enable-libgcc' '--enable-ipv6' 'host_alias=arm-linux-androideabi' 'target_alias=arm-linux-androideabi' 'CC=/home/gustavo/android-ndk-r10c/toolchains/arm-linux-androideabi-4.6/prebuilt/linux-x86_64/bin/arm-linux-androideabi-gcc' 'LDFLAGS=-L/home/gustavo/Documentos/curl_ssl_lib/curl-compile-scripts/obj/local/armeabi' 'LIBS=-lssl -lcrypto' 'CPPFLAGS=-I/home/gustavo/android-ndk-r10c//platforms/android-21/arch-arm/usr/include --sysroot=/home/gustavo/android-ndk-r10c//platforms/android-21/arch-arm' 'CPP=/home/gustavo/android-ndk-r10c/toolchains/arm-linux-androideabi-4.6/prebuilt/linux-x86_64/bin/arm-linux-androideabi-cpp'"
+CPP = /home/gustavo/android-ndk-r10c/toolchains/arm-linux-androideabi-4.6/prebuilt/linux-x86_64/bin/arm-linux-androideabi-cpp
+CPPFLAGS = -isystem /home/gustavo/android-ndk-r10c//platforms/android-21/arch-arm/usr/include --sysroot=/home/gustavo/android-ndk-r10c//platforms/android-21/arch-arm -I/home/gustavo/Documentos/curl_ssl_lib/curl-compile-scripts/../openssl/include -I/home/gustavo/Documentos/curl_ssl_lib/curl-compile-scripts/../openssl/include/openssl
 CPPFLAG_CURL_STATICLIB = -DCURL_STATICLIB
 CURLVERSION = 7.38.0-DEV
 CURL_CA_BUNDLE = 
@@ -239,7 +239,7 @@ INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
 IPV6_ENABLED = 1
-LD = /home/gustavo/android-ndk-r10/toolchains/arm-linux-androideabi-4.6/prebuilt/linux-x86_64/bin/arm-linux-androideabi-ld
+LD = /home/gustavo/android-ndk-r10c/toolchains/arm-linux-androideabi-4.6/prebuilt/linux-x86_64/bin/arm-linux-androideabi-ld
 LDFLAGS = -L/home/gustavo/Documentos/curl_ssl_lib/curl-compile-scripts/obj/local/armeabi -L/home/gustavo/Documentos/curl_ssl_lib/curl-compile-scripts/../openssl/lib
 LIBCURL_LIBS = -lssl -lcrypto -lz -lgcc -lssl -lcrypto
 LIBMETALINK_CPPFLAGS = 
@@ -278,7 +278,7 @@ PKGADD_PKG = HAXXcurl
 PKGADD_VENDOR = curl.haxx.se
 PKGCONFIG = no
 RANDOM_FILE = 
-RANLIB = /home/gustavo/android-ndk-r10/toolchains/arm-linux-androideabi-4.6/prebuilt/linux-x86_64/bin/arm-linux-androideabi-ranlib
+RANLIB = /home/gustavo/android-ndk-r10c/toolchains/arm-linux-androideabi-4.6/prebuilt/linux-x86_64/bin/arm-linux-androideabi-ranlib
 REQUIRE_LIB_DEPS = yes
 SED = /bin/sed
 SET_MAKE = 
