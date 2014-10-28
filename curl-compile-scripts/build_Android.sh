@@ -1,6 +1,6 @@
 #!/bin/bash
 #Change this env variable to the number of processors you have
-TARGET=android-21
+TARGET=android-8
 JOBS=$(grep flags /proc/cpuinfo |wc -l)
 if [ -z "$JOBS" ]; then
   JOBS=1

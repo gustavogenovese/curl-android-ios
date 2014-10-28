@@ -5,6 +5,11 @@
 #ifdef ANDROID
 	#include <android/log.h>
 	#include <jni.h>
+	#ifdef __LP64__
+		#define SIZE_T_TYPE "%lu"
+	#else
+		#define SIZE_T_TYPE "%u"
+	#endif	
 #endif
 
 #ifdef ANDROID
@@ -34,7 +39,7 @@ BOOL downloadUrl(const char* url, LPCURL_DOWNLOAD_OBJECT downloadObject ) {
 }
 
 size_t curlCallback(char *data, size_t size, size_t count, void* userdata) {
-	LOGI("Downloaded data size is %d", size*count);
+	LOGI("Downloaded data size is " SIZE_T_TYPE, size*count);
 
     LPCURL_DOWNLOAD_OBJECT downloadObject = (LPCURL_DOWNLOAD_OBJECT) userdata;
     long newSize = 0;

@@ -23,7 +23,7 @@ LOCAL_CFLAGS += $(COMMON_CFLAGS)
 LOCAL_LDLIBS := -lz -llog -Wl,-s
 LOCAL_CPPFLAGS += -std=gnu++0x
 LOCAL_C_INCLUDES += \
-  $(NDK_PATH)/platforms/$(TARGET_PLATFORM)/arch-arm/usr/include \
+  $(NDK_PATH)/platforms/$(TARGET_PLATFORM)/arch-$(TARGET_ARCH)/usr/include \
   $(LOCAL_PATH)/../../prebuilt-with-ssl/android/include
 
 include $(BUILD_SHARED_LIBRARY)
