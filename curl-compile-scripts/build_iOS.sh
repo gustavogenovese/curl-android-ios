@@ -39,7 +39,7 @@ export IPHONEOS_DEPLOYMENT_TARGET="4.3"
 ARCHS=(armv7 armv7s arm64 i386 x86_64)
 HOSTS=(armv7 armv7s arm i386 x86_64)
 PLATFORMS=(iPhoneOS iPhoneOS iPhoneOS iPhoneSimulator iPhoneSimulator)
-SDK=(iPhoneOS7.1 iPhoneOS7.1 iPhoneOS7.1 iPhoneSimulator7.1 iPhoneSimulator7.1)
+SDK=(iPhoneOS iPhoneOS iPhoneOS iPhoneSimulator iPhoneSimulator)
 
 #Build for all the architectures
 for (( i=0; i<${#ARCHS[@]}; i++ )); do

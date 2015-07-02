@@ -1,9 +1,13 @@
 #!/bin/bash
 #Change this env variable to the number of processors you have
 TARGET=android-8
-JOBS=$(grep flags /proc/cpuinfo |wc -l)
-if [ -z "$JOBS" ]; then
-  JOBS=1
+
+if [ -f /proc/cpuinfo ]; then
+  JOBS=$(grep flags /proc/cpuinfo |wc -l)
+elif [ ! -z $(which sysctl) ]; then
+  JOBS=$(sysctl -n hw.ncpu)
+else
+  JOBS=2
 fi
 
 REL_SCRIPT_PATH="$(dirname $0)"
