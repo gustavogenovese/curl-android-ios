@@ -12,7 +12,7 @@ CURL_COMMON_CFLAGS += \
   -Wno-system-headers -Wno-typedef-redefinition -Wno-unused-variable \
   -Wno-unused-function 
 CURL_CSOURCES := \
-  amigaos.c asyn-ares.c asyn-thread.c base64.c bundles.c conncache.c \
+  amigaos.c asyn-ares.c asyn-thread.c base64.c conncache.c \
   connect.c content_encoding.c cookie.c curl_addrinfo.c curl_fnmatch.c \
   curl_gethostname.c curl_gssapi.c curl_memrchr.c curl_multibyte.c \
   curl_ntlm.c curl_ntlm_core.c curl_ntlm_msgs.c curl_ntlm_wb.c curl_rtmp.c \
@@ -28,9 +28,10 @@ CURL_CSOURCES := \
   smtp.c socks.c socks_gssapi.c socks_sspi.c speedcheck.c splay.c ssh.c \
   strdup.c strequal.c strerror.c strtok.c strtoofft.c telnet.c tftp.c \
   timeval.c transfer.c url.c version.c warnless.c wildcard.c x509asn1.c \
-  vtls/axtls.c vtls/curl_darwinssl.c vtls/curl_schannel.c vtls/cyassl.c \
+  smb.c curl_sasl_gssapi.c curl_endian.c curl_des.c \
+  vtls/axtls.c vtls/darwinssl.c vtls/schannel.c vtls/cyassl.c \
   vtls/gskit.c vtls/gtls.c vtls/nss.c vtls/openssl.c vtls/polarssl.c \
-  vtls/polarssl_threadlock.c vtls/qssl.c vtls/vtls.c
+  vtls/polarssl_threadlock.c vtls/vtls.c
 CURL_LOCAL_SRC_FILES := $(addprefix ../../curl/lib/,$(CURL_CSOURCES))
 CURL_LOCAL_C_INCLUDES += \
   $(LOCAL_PATH)/../../curl/include \
