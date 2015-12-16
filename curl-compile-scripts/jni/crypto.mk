@@ -1,6 +1,6 @@
 CRYPTO_COMMON_CFLAGS := \
   -DANDROID -DOPENSSL_NO_ASM -DOPENSSL_THREADS -D_REENTRANT \
-  -DDSO_DLFCN -DHAVE_DLFCN_H -DOPENSSL_NO_CAST -DOPENSSL_NO_CAMELLIA \
+  -DDSO_DLFCN -DHAVE_DLFCN_H -DOPENSSL_NO_CAST -DOPENSSL_NO_CAMELLIA -DOPENSSL_NO_GOST \
   -DOPENSSL_NO_IDEA -DOPENSSL_NO_MDC2 -DOPENSSL_NO_SEED -DOPENSSL_NO_WHIRLPOOL
 CRYPTO_COMMON_CFLAGS += -Wno-typedef-redefinition -Wno-sign-compare\
   -Wno-incompatible-pointer-types-discards-qualifiers
@@ -56,12 +56,7 @@ CRYPTO_CSOURCES := \
   ec/ecp_nist.c ec/ecp_oct.c ec/ecp_smpl.c ecdh/ech_err.c ecdh/ech_key.c \
   ecdh/ech_lib.c ecdh/ech_ossl.c ecdsa/ecs_asn1.c ecdsa/ecs_err.c \
   ecdsa/ecs_lib.c ecdsa/ecs_ossl.c ecdsa/ecs_sign.c ecdsa/ecs_vrf.c \
-  engine/eng_all.c engine/eng_cnf.c engine/eng_ctrl.c engine/eng_dyn.c \
-  engine/eng_err.c engine/eng_fat.c engine/eng_init.c engine/eng_lib.c \
-  engine/eng_list.c engine/eng_pkey.c engine/eng_table.c engine/tb_asnmth.c \
-  engine/tb_cipher.c engine/tb_dh.c engine/tb_digest.c engine/tb_dsa.c \
-  engine/tb_ecdh.c engine/tb_ecdsa.c engine/tb_pkmeth.c engine/tb_rand.c \
-  engine/tb_rsa.c engine/tb_store.c err/err.c err/err_all.c err/err_prn.c \
+  err/err.c err/err_all.c err/err_prn.c \
   evp/bio_b64.c evp/bio_enc.c evp/bio_md.c evp/bio_ok.c evp/c_all.c \
   evp/c_allc.c evp/c_alld.c evp/digest.c evp/e_aes.c evp/e_aes_cbc_hmac_sha1.c\
   evp/e_bf.c evp/e_des.c evp/e_des3.c evp/e_null.c evp/e_old.c evp/e_rc2.c \
