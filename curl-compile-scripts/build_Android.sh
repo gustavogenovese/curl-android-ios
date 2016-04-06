@@ -10,8 +10,11 @@ else
   JOBS=2
 fi
 
-REL_SCRIPT_PATH="$(dirname $0)"
-SCRIPTPATH=$(realpath $REL_SCRIPT_PATH)
+#Get current directory
+pushd `dirname $0` > /dev/null
+SCRIPTPATH=$(pwd)
+popd > /dev/null
+
 CURLPATH="$SCRIPTPATH/../curl"
 SSLPATH="$SCRIPTPATH/../openssl"
 
