@@ -2,6 +2,12 @@
 #Change this env variable to the number of processors you have
 TARGET=android-8
 
+mac_realpath() {
+   [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+}
+
+PWD=$(pwd)
+
 if [ -f /proc/cpuinfo ]; then
   JOBS=$(grep flags /proc/cpuinfo |wc -l)
 elif [ ! -z $(which sysctl) ]; then
@@ -11,7 +17,14 @@ else
 fi
 
 REL_SCRIPT_PATH="$(dirname $0)"
-SCRIPTPATH=$(realpath $REL_SCRIPT_PATH)
+SCRIPTPATH=""
+PLATFORM=`uname`
+if [[ "$PLATFORM" == 'Darwin' ]]; then
+    SCRIPTPATH=$(mac_realpath $REL_SCRIPT_PATH)
+else
+    SCRIPTPATH=$(realpath $REL_SCRIPT_PATH)
+fi
+
 CURLPATH="$SCRIPTPATH/../curl"
 SSLPATH="$SCRIPTPATH/../openssl"
 
@@ -113,7 +126,7 @@ for p in ${PLATFORMS[*]}; do
   STRIP=$($SCRIPTPATH/ndk-which strip $p)
   
   SRC=$SCRIPTPATH/obj/local/$p/libcurl.a
-  DEST=$DESTDIR/$p/libcurl.a
+  DEST=$DESTDIR/$p/libcurl-with-openssl.a
 
   if [ -z "$STRIP" ]; then
     echo "WARNING: Could not find 'strip' for $p"
@@ -123,8 +136,9 @@ for p in ${PLATFORMS[*]}; do
   fi
 done
 
-#Copying cURL headers
+#Copying cURL & OpenSSL headers
 cp -R $CURLPATH/include $DESTDIR/
+cp -R -L $SSLPATH/include $DESTDIR/
 rm $DESTDIR/include/curl/.gitignore
 
 cd $PWD
