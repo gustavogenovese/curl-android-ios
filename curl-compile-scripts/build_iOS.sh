@@ -56,7 +56,7 @@ for (( i=0; i<${#ARCHS[@]}; i++ )); do
 			--disable-shared \
 			--enable-threaded-resolver \
 			--disable-verbose \
-			--enable-ipv6 
+			--enable-ipv6
 	EXITCODE=$?
 	if [ $EXITCODE -ne 0 ]; then
 		echo "Error running the cURL configure program"
@@ -68,7 +68,7 @@ for (( i=0; i<${#ARCHS[@]}; i++ )); do
 	EXITCODE=$?
 	if [ $EXITCODE -ne 0 ]; then
 		echo "Error running the make program"
-		cd $"PWD"
+		cd "$PWD"
 		exit $EXITCODE
 	fi
 	mkdir -p "$DESTDIR/$ARCH"
@@ -104,4 +104,3 @@ sed 's/#define CURL_SIZEOF_CURL_OFF_T 8/\
 rm curlbuild.h.temp
 
 cd "$PWD"
-

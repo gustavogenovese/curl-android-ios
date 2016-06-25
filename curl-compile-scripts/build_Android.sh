@@ -1,7 +1,11 @@
 #!/bin/bash
-#Change this env variable to the number of processors you have
-TARGET=android-8
+TARGET=android-9
 
+real_path() {
+  [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+}
+
+#Change this env variable to the number of processors you have
 if [ -f /proc/cpuinfo ]; then
   JOBS=$(grep flags /proc/cpuinfo |wc -l)
 elif [ ! -z $(which sysctl) ]; then
@@ -11,12 +15,17 @@ else
 fi
 
 REL_SCRIPT_PATH="$(dirname $0)"
-SCRIPTPATH=$(realpath $REL_SCRIPT_PATH)
+SCRIPTPATH=$(real_path $REL_SCRIPT_PATH)
 CURLPATH="$SCRIPTPATH/../curl"
 SSLPATH="$SCRIPTPATH/../openssl"
 
 if [ -z "$NDK_ROOT" ]; then
   echo "Please set your NDK_ROOT environment variable first"
+  exit 1
+fi
+
+if [[ "$NDK_ROOT" == .* ]]; then
+  echo "Please set your NDK_ROOT to an absolute path"
   exit 1
 fi
 
@@ -38,7 +47,7 @@ if [ $EXITCODE -ne 0 ]; then
 	echo "Error building the libssl and libcrypto"
 	cd $PWD
 	exit $EXITCODE
-fi 
+fi
 
 #Configure cURL
 cd $CURLPATH
@@ -56,7 +65,6 @@ if [ ! -x "$CURLPATH/configure" ]; then
 	fi
 fi
 
-GCC_PATH=$($NDK_ROOT/ndk-which gcc)
 export SYSROOT="$NDK_ROOT/platforms/$TARGET/arch-arm"
 export CPPFLAGS="-I$NDK_ROOT/platforms/$TARGET/arch-arm/usr/include --sysroot=$SYSROOT"
 export CC=$($NDK_ROOT/ndk-which gcc)
@@ -108,10 +116,10 @@ fi
 PLATFORMS=(arm64-v8a x86_64 mips64 armeabi armeabi-v7a x86 mips)
 DESTDIR=$SCRIPTPATH/../prebuilt-with-ssl/android
 
-for p in ${PLATFORMS[*]}; do 
+for p in ${PLATFORMS[*]}; do
   mkdir -p $DESTDIR/$p
   STRIP=$($SCRIPTPATH/ndk-which strip $p)
-  
+
   SRC=$SCRIPTPATH/obj/local/$p/libcurl.a
   DEST=$DESTDIR/$p/libcurl.a
 
