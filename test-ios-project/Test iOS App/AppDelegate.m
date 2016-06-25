@@ -26,10 +26,13 @@ BOOL downloadUrl(const char* url, LPCURL_DOWNLOAD_OBJECT downloadObject);
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
+
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    
+
+    UIViewController* controller = [[UIViewController alloc] init];
+    [self.window setRootViewController:controller];
+
     const char* url = "https://www.google.com";
     NSLog(@"Starting the download of url %s", url);
     CURL_DOWNLOAD_OBJECT downloadObject;
