@@ -5,11 +5,10 @@
 	android:versionCode="1"
 	android:versionName="1.0.0">
 	
-	<uses-sdk android:minSdkVersion="10" />
-	<uses-sdk android:targetSdkVersion="20" /> 
 	<uses-permission android:name="android.permission.INTERNET" />
 
-	<application android:label="Test Android App"
+	<application
+		android:label="Test Android App"
 		android:icon="@drawable/icon">
 
 		<activity

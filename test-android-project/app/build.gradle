@@ -1,0 +1,50 @@
+apply plugin: 'com.android.application'
+import org.apache.tools.ant.taskdefs.condition.Os
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        applicationId "com.example.androidtest"
+        minSdkVersion 10
+        targetSdkVersion 23
+    }
+
+    //do not run the automatic jni task
+    sourceSets.main.jni.srcDirs = []
+    sourceSets.main.jniLibs.srcDirs = ['build/libs']
+
+    //run this custom ndk tasks instead
+    task ndkBuild(type: Exec) {
+        def wd = file('.').absolutePath
+        workingDir wd
+
+        def ndkDir = plugins.getPlugin('com.android.application').sdkHandler.getNdkFolder()
+        if (ndkDir == null)
+            throw new RuntimeException("ndk.dir=/path/to/ndk was not found in your local.properties file and ANDROID_NDK_HOME enviroment variable was not set either");
+
+        def pathToScript = ndkDir.toString() + '/ndk-build'
+        if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+            pathToScript += '.cmd'
+        }
+
+        commandLine pathToScript.toString(),
+                '-C', wd.toString(),
+                '-j', 4,
+                'NDK_PROJECT_PATH=build',
+                'APP_BUILD_SCRIPT=src/main/jni/Android.mk',
+                'NDK_APPLICATION_MK=src/main/jni/Application.mk'
+    }
+
+    tasks.withType(JavaCompile) {
+        compileTask -> compileTask.dependsOn ndkBuild
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
