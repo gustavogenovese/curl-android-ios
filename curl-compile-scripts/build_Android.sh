@@ -67,13 +67,13 @@ fi
 
 export SYSROOT="$NDK_ROOT/platforms/$TARGET/arch-arm"
 export CPPFLAGS="-I$NDK_ROOT/platforms/$TARGET/arch-arm/usr/include --sysroot=$SYSROOT"
-export CC=$($NDK_ROOT/ndk-which gcc)
-export LD=$($NDK_ROOT/ndk-which ld)
-export CPP=$($NDK_ROOT/ndk-which cpp)
-export CXX=$($NDK_ROOT/ndk-which g++)
-export AS=$($NDK_ROOT/ndk-which as)
-export AR=$($NDK_ROOT/ndk-which ar)
-export RANLIB=$($NDK_ROOT/ndk-which ranlib)
+export CC=$($SCRIPTPATH/ndk-which gcc)
+export LD=$($SCRIPTPATH/ndk-which ld)
+export CPP=$($SCRIPTPATH/ndk-which cpp)
+export CXX=$($SCRIPTPATH/ndk-which g++)
+export AS=$($SCRIPTPATH/ndk-which as)
+export AR=$($SCRIPTPATH/ndk-which ar)
+export RANLIB=$($SCRIPTPATH/ndk-which ranlib)
 
 export LIBS="-lssl -lcrypto"
 export LDFLAGS="-L$SCRIPTPATH/obj/local/armeabi"
