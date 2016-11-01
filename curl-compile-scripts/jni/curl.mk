@@ -20,7 +20,7 @@ CURL_CSOURCES := \
   easy.c escape.c file.c fileinfo.c formdata.c ftp.c ftplistparser.c \
   getenv.c getinfo.c gopher.c hash.c hmac.c hostasyn.c hostcheck.c \
   hostip4.c hostip6.c hostip.c hostsyn.c http2.c http.c http_chunks.c \
-  http_digest.c http_negotiate.c http_proxy.c \
+  http_digest.c http_negotiate.c http_ntlm.c http_proxy.c \
   idn_win32.c if2ip.c imap.c inet_ntop.c inet_pton.c krb5.c ldap.c llist.c \
   md4.c md5.c memdebug.c mprintf.c multi.c netrc.c non-ascii.c nonblock.c \
   nwlib.c nwos.c openldap.c parsedate.c pingpong.c pipeline.c pop3.c \
@@ -31,7 +31,9 @@ CURL_CSOURCES := \
   smb.c curl_endian.c curl_des.c \
   vtls/axtls.c vtls/darwinssl.c vtls/schannel.c vtls/cyassl.c \
   vtls/gskit.c vtls/gtls.c vtls/nss.c vtls/openssl.c vtls/polarssl.c \
-  vtls/polarssl_threadlock.c vtls/vtls.c
+  vtls/polarssl_threadlock.c vtls/vtls.c \
+  vauth/vauth.c vauth/cleartext.c vauth/cram.c vauth/digest.c vauth/digest_sspi.c \
+  vauth/oauth2.c vauth/ntlm.c vauth/ntlm_sspi.c vauth/digest_sspi.c 
 CURL_LOCAL_SRC_FILES := $(addprefix ../../curl/lib/,$(CURL_CSOURCES))
 CURL_LOCAL_C_INCLUDES += \
   $(LOCAL_PATH)/../../curl/include \
