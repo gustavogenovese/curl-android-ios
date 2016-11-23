@@ -104,6 +104,13 @@ sed 's/#define CURL_SIZEOF_LONG 4/\
 
 mv curlbuild.h.temp curlbuild.h
 
+sed '
+$ i\
+\#define BUILDING_LIBCURL \
+' <  curlbuild.h >  curlbuild.h.temp
+
+mv curlbuild.h.temp curlbuild.h
+
 #Build cURL
 $NDK_ROOT/ndk-build -j$JOBS -C $SCRIPTPATH curl
 EXITCODE=$?
