@@ -31,6 +31,7 @@ if [ ! -x "$CURLPATH/configure" ]; then
 	fi
 fi
 
+git apply ../patches/patch_curl_fixes1172.diff
 
 export CC="$XCODE/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang"
 DESTDIR="$SCRIPTPATH/../prebuilt-with-ssl/iOS"
@@ -76,6 +77,8 @@ for (( i=0; i<${#ARCHS[@]}; i++ )); do
 	cp "$CURLPATH/lib/.libs/libcurl.a" "$DESTDIR/libcurl-$ARCH.a"
 	make clean
 done
+
+git checkout $CURLPATH
 
 #Build a single static lib with all the archs in it
 cd "$DESTDIR"
