@@ -35,7 +35,7 @@ CRYPTO_CSOURCES := \
   bn/bn_word.c buffer/buf_err.c buffer/buf_str.c buffer/buffer.c \
   cmac/cm_ameth.c cmac/cm_pmeth.c cmac/cmac.c cms/cms_asn1.c cms/cms_att.c \
   cms/cms_cd.c cms/cms_dd.c cms/cms_enc.c cms/cms_env.c cms/cms_err.c \
-  cms/cms_ess.c cms/cms_io.c cms/cms_lib.c cms/cms_pwri.c cms/cms_sd.c \
+  cms/cms_ess.c cms/cms_io.c cms/cms_kari.c cms/cms_lib.c cms/cms_pwri.c cms/cms_sd.c \
   cms/cms_smime.c comp/c_rle.c comp/c_zlib.c comp/comp_err.c comp/comp_lib.c \
   conf/conf_api.c conf/conf_def.c conf/conf_err.c conf/conf_lib.c \
   conf/conf_mall.c conf/conf_mod.c conf/conf_sap.c cpt_err.c cryptlib.c \
@@ -45,7 +45,7 @@ CRYPTO_CSOURCES := \
   des/fcrypt_b.c des/ofb64ede.c des/ofb64enc.c des/ofb_enc.c des/pcbc_enc.c \
   des/qud_cksm.c des/rand_key.c des/read2pwd.c des/rpc_enc.c des/set_key.c \
   des/str2key.c des/xcbc_enc.c dh/dh_ameth.c dh/dh_asn1.c dh/dh_check.c \
-  dh/dh_depr.c dh/dh_err.c dh/dh_gen.c dh/dh_key.c dh/dh_lib.c dh/dh_pmeth.c \
+  dh/dh_depr.c dh/dh_err.c dh/dh_gen.c dh/dh_kdf.c dh/dh_key.c dh/dh_lib.c dh/dh_pmeth.c dh/dh_rfc5114.c \
   dsa/dsa_ameth.c dsa/dsa_asn1.c dsa/dsa_depr.c dsa/dsa_err.c dsa/dsa_gen.c \
   dsa/dsa_key.c dsa/dsa_lib.c dsa/dsa_ossl.c dsa/dsa_pmeth.c dsa/dsa_prn.c \
   dsa/dsa_sign.c dsa/dsa_vrf.c dso/dso_dl.c dso/dso_dlfcn.c dso/dso_err.c \
@@ -53,7 +53,7 @@ CRYPTO_CSOURCES := \
   ec/ec2_oct.c ec/ec2_smpl.c ec/ec_ameth.c ec/ec_asn1.c ec/ec_check.c \
   ec/ec_curve.c ec/ec_cvt.c ec/ec_err.c ec/ec_key.c ec/ec_lib.c ec/ec_mult.c \
   ec/ec_oct.c ec/ec_pmeth.c ec/ec_print.c ec/eck_prn.c ec/ecp_mont.c \
-  ec/ecp_nist.c ec/ecp_oct.c ec/ecp_smpl.c ecdh/ech_err.c ecdh/ech_key.c \
+  ec/ecp_nist.c ec/ecp_oct.c ec/ecp_smpl.c ecdh/ech_err.c ecdh/ech_kdf.c ecdh/ech_key.c \
   ecdh/ech_lib.c ecdh/ech_ossl.c ecdsa/ecs_asn1.c ecdsa/ecs_err.c \
   ecdsa/ecs_lib.c ecdsa/ecs_ossl.c ecdsa/ecs_sign.c ecdsa/ecs_vrf.c \
   engine/eng_all.c engine/eng_cnf.c engine/eng_ctrl.c engine/eng_dyn.c \
@@ -63,8 +63,8 @@ CRYPTO_CSOURCES := \
   engine/tb_ecdh.c engine/tb_ecdsa.c engine/tb_pkmeth.c engine/tb_rand.c \
   engine/tb_rsa.c engine/tb_store.c err/err.c err/err_all.c err/err_prn.c \
   evp/bio_b64.c evp/bio_enc.c evp/bio_md.c evp/bio_ok.c evp/c_all.c \
-  evp/c_allc.c evp/c_alld.c evp/digest.c evp/e_aes.c evp/e_aes_cbc_hmac_sha1.c\
-  evp/e_bf.c evp/e_des.c evp/e_des3.c evp/e_null.c evp/e_old.c evp/e_rc2.c \
+  evp/c_allc.c evp/c_alld.c evp/digest.c evp/e_aes.c evp/e_aes_cbc_hmac_sha1.c evp/e_aes_cbc_hmac_sha256.c \
+  evp/e_bf.c evp/e_cast.c evp/e_des.c evp/e_des3.c evp/e_null.c evp/e_old.c evp/e_rc2.c \
   evp/e_rc4.c evp/e_rc4_hmac_md5.c evp/e_rc5.c evp/e_xcbc_d.c evp/encode.c \
   evp/evp_acnf.c evp/evp_cnf.c evp/evp_enc.c evp/evp_err.c evp/evp_key.c \
   evp/evp_lib.c evp/evp_pbe.c evp/evp_pkey.c evp/m_dss.c evp/m_dss1.c \
@@ -76,7 +76,7 @@ CRYPTO_CSOURCES := \
   hmac/hmac.c krb5/krb5_asn.c lhash/lh_stats.c lhash/lhash.c md4/md4_dgst.c \
   md4/md4_one.c md5/md5_dgst.c md5/md5_one.c mem.c mem_clr.c mem_dbg.c \
   modes/cbc128.c modes/ccm128.c modes/cfb128.c modes/ctr128.c modes/gcm128.c \
-  modes/ofb128.c modes/xts128.c o_dir.c o_init.c o_str.c o_time.c \
+  modes/ofb128.c modes/wrap128.c modes/xts128.c o_dir.c o_init.c o_str.c o_time.c \
   objects/o_names.c objects/obj_dat.c objects/obj_err.c objects/obj_lib.c \
   objects/obj_xref.c ocsp/ocsp_asn.c ocsp/ocsp_cl.c ocsp/ocsp_err.c \
   ocsp/ocsp_ext.c ocsp/ocsp_ht.c ocsp/ocsp_lib.c ocsp/ocsp_prn.c \
@@ -112,7 +112,7 @@ CRYPTO_CSOURCES := \
   x509v3/v3_ia5.c x509v3/v3_info.c x509v3/v3_int.c x509v3/v3_lib.c \
   x509v3/v3_ncons.c x509v3/v3_ocsp.c x509v3/v3_pci.c x509v3/v3_pcia.c \
   x509v3/v3_pcons.c x509v3/v3_pku.c x509v3/v3_pmaps.c x509v3/v3_prn.c \
-  x509v3/v3_purp.c x509v3/v3_skey.c x509v3/v3_sxnet.c x509v3/v3_utl.c \
+  x509v3/v3_purp.c x509v3/v3_scts.c x509v3/v3_skey.c x509v3/v3_sxnet.c x509v3/v3_utl.c \
   x509v3/v3err.c
 CRYPTO_LOCAL_SRC_FILES := $(addprefix ../../openssl/crypto/,$(CRYPTO_CSOURCES))
 CRYPTO_LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../openssl \
