@@ -84,7 +84,7 @@ export LDFLAGS="-L$SCRIPTPATH/obj/local/armeabi"
             --disable-verbose \
             --enable-threaded-resolver \
             --enable-libgcc \
-            --enable-ipv6 \
+            --enable-ipv6
 
 EXITCODE=$?
 if [ $EXITCODE -ne 0 ]; then

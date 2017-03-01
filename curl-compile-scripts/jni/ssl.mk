@@ -10,7 +10,7 @@ SSL_CSOURCES := \
   s3_pkt.c s3_srvr.c ssl_algs.c ssl_asn1.c ssl_cert.c ssl_ciph.c ssl_conf.c \
   ssl_err.c ssl_err2.c ssl_lib.c ssl_rsa.c ssl_sess.c ssl_stat.c \
   ssl_txt.c t1_clnt.c t1_enc.c t1_ext.c t1_lib.c t1_meth.c t1_reneg.c \
-  t1_srvr.c tls_srp. t1_trce.c
+  t1_srvr.c tls_srp.c t1_trce.c
 SSL_LOCAL_SRC_FILES := $(addprefix ../../openssl/ssl/,$(SSL_CSOURCES))
 SSL_LOCAL_C_INCLUDES := \
   $(LOCAL_PATH)/../../openssl/include \
