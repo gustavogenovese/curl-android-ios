@@ -86,24 +86,11 @@ lipo -create -output libcurl.a libcurl-*.a
 rm libcurl-*.a
 
 #Copying cURL headers
+if [ -d "$DESTDIR/include" ]; then
+	echo "Cleaning headers"
+	rm -rf "$DESTDIR/include"
+fi
 cp -R "$CURLPATH/include" "$DESTDIR/"
 rm "$DESTDIR/include/curl/.gitignore"
-
-#Patch headers for 64-bit archs
-cd "$DESTDIR/include/curl"
-sed 's/#define CURL_SIZEOF_LONG 8/\
-#ifdef __LP64__\
-#define CURL_SIZEOF_LONG 8\
-#else\
-#define CURL_SIZEOF_LONG 4\
-#endif/'< curlbuild.h > curlbuild.h.temp
-
-sed 's/#define CURL_SIZEOF_CURL_OFF_T 8/\
-#ifdef __LP64__\
-#define CURL_SIZEOF_CURL_OFF_T 8\
-#else\
-#define CURL_SIZEOF_CURL_OFF_T 4\
-#endif/' < curlbuild.h.temp > curlbuild.h
-rm curlbuild.h.temp
 
 cd "$PWD"

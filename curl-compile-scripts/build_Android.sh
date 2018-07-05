@@ -108,17 +108,6 @@ if [ $EXITCODE -ne 0 ]; then
 	exit $EXITCODE
 fi
 
-#Patch headers for 64-bit archs
-cd "$CURLPATH/include/curl"
-sed 's/#define CURL_SIZEOF_LONG 4/\
-#ifdef __LP64__\
-#define CURL_SIZEOF_LONG 8\
-#else\
-#define CURL_SIZEOF_LONG 4\
-#endif/'< curlbuild.h > curlbuild.h.temp
-
-mv curlbuild.h.temp curlbuild.h
-
 #Build cURL
 $NDK_ROOT/ndk-build -j$JOBS -C $SCRIPTPATH curl
 EXITCODE=$?
@@ -147,6 +136,10 @@ for p in ${PLATFORMS[*]}; do
 done
 
 #Copying cURL headers
+if [ -d "$DESTDIR/include" ]; then
+	echo "Cleaning headers"
+	rm -rf "$DESTDIR/include"
+fi
 cp -R $CURLPATH/include $DESTDIR/
 rm $DESTDIR/include/curl/.gitignore
 
