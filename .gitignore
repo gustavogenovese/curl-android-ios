@@ -10,3 +10,4 @@ test-android-project/libs
 libcurl-*.a
 xcuserdata
 Makefile
+/toolchain

@@ -1,17 +1,17 @@
 #!/bin/bash
-TARGET=android-9
+TARGET=android-19
 
 real_path() {
-  [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+	[[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
 }
 
 #Change this env variable to the number of processors you have
 if [ -f /proc/cpuinfo ]; then
-  JOBS=$(grep flags /proc/cpuinfo |wc -l)
+	JOBS=$(grep flags /proc/cpuinfo |wc -l)
 elif [ ! -z $(which sysctl) ]; then
-  JOBS=$(sysctl -n hw.ncpu)
+	JOBS=$(sysctl -n hw.ncpu)
 else
-  JOBS=2
+	JOBS=2
 fi
 
 REL_SCRIPT_PATH="$(dirname $0)"
@@ -20,13 +20,13 @@ CURLPATH="$SCRIPTPATH/../curl"
 SSLPATH="$SCRIPTPATH/../openssl"
 
 if [ -z "$NDK_ROOT" ]; then
-  echo "Please set your NDK_ROOT environment variable first"
-  exit 1
+	echo "Please set your NDK_ROOT environment variable first"
+	exit 1
 fi
 
 if [[ "$NDK_ROOT" == .* ]]; then
-  echo "Please set your NDK_ROOT to an absolute path"
-  exit 1
+	echo "Please set your NDK_ROOT to an absolute path"
+	exit 1
 fi
 
 #Configure OpenSSL
@@ -49,6 +49,27 @@ if [ $EXITCODE -ne 0 ]; then
 	exit $EXITCODE
 fi
 
+#Configure toolchain
+TOOLCHAIN=$SCRIPTPATH/../toolchain
+if [ -d "$TOOLCHAIN" ]; then
+	echo Removing existing toolchain
+	rm -rf "$TOOLCHAIN"
+fi
+$NDK_ROOT/build/tools/make-standalone-toolchain.sh --arch=arm --platform=$TARGET --install-dir=$TOOLCHAIN
+
+# Setup cross-compile environment
+export SYSROOT=$TOOLCHAIN/sysroot
+export ARCH=armv7
+export CC=$TOOLCHAIN/bin/arm-linux-androideabi-gcc
+export CXX=$TOOLCHAIN/bin/arm-linux-androideabi-g++
+export AR=$TOOLCHAIN/bin/arm-linux-androideabi-ar
+export AS=$TOOLCHAIN/bin/arm-linux-androideabi-as
+export LD=$TOOLCHAIN/bin/arm-linux-androideabi-ld
+export RANLIB=$TOOLCHAIN/bin/arm-linux-androideabi-ranlib
+export NM=$TOOLCHAIN/bin/arm-linux-androideabi-nm
+export STRIP=$TOOLCHAIN/bin/arm-linux-androideabi-strip
+export CHOST=$TOOLCHAIN/bin/arm-linux-androideabi
+
 #Configure cURL
 cd $CURLPATH
 if [ ! -x "$CURLPATH/configure" ]; then
@@ -65,32 +86,26 @@ if [ ! -x "$CURLPATH/configure" ]; then
 	fi
 fi
 
-export SYSROOT="$NDK_ROOT/platforms/$TARGET/arch-arm"
-export CPPFLAGS="-I$NDK_ROOT/platforms/$TARGET/arch-arm/usr/include --sysroot=$SYSROOT"
-export CC=$($NDK_ROOT/ndk-which gcc)
-export LD=$($NDK_ROOT/ndk-which ld)
-export CPP=$($NDK_ROOT/ndk-which cpp)
-export CXX=$($NDK_ROOT/ndk-which g++)
-export AS=$($NDK_ROOT/ndk-which as)
-export AR=$($NDK_ROOT/ndk-which ar)
-export RANLIB=$($NDK_ROOT/ndk-which ranlib)
-
+export CFLAGS="--sysroot=$SYSROOT -march=$ARCH -mandroid -mthumb"
+export CPPFLAGS="$CFLAGS -I$TOOLCHAIN/include -DANDROID -DCURL_STATICLIB"
 export LIBS="-lssl -lcrypto"
-export LDFLAGS="-L$SCRIPTPATH/obj/local/armeabi"
-./configure --host=arm-linux-androideabi --target=arm-linux-androideabi \
-            --with-ssl=$SSLPATH \
-            --enable-static \
-            --disable-shared \
-            --disable-verbose \
-            --enable-threaded-resolver \
-            --enable-libgcc \
-            --enable-ipv6
+export LDFLAGS="-march=$ARCH -L$SCRIPTPATH/obj/local/armeabi-v7a"
+./configure \
+	--host=arm-linux-androideabi \
+	--target=arm-linux-androideabi \
+	--with-ssl=$SSLPATH \
+	--enable-static \
+	--disable-shared \
+	--disable-verbose \
+	--enable-threaded-resolver \
+	--enable-libgcc \
+	--enable-ipv6
 
 EXITCODE=$?
 if [ $EXITCODE -ne 0 ]; then
-  echo "Error running the configure program"
-  cd $PWD
-  exit $EXITCODE
+	echo "Error running the configure program"
+	cd $PWD
+	exit $EXITCODE
 fi
 
 #Patch headers for 64-bit archs
@@ -113,7 +128,7 @@ if [ $EXITCODE -ne 0 ]; then
 fi
 
 #Strip debug symbols and copy to the prebuilt folder
-PLATFORMS=(arm64-v8a x86_64 mips64 armeabi armeabi-v7a x86 mips)
+PLATFORMS=(arm64-v8a x86_64 armeabi-v7a x86)
 DESTDIR=$SCRIPTPATH/../prebuilt-with-ssl/android
 
 for p in ${PLATFORMS[*]}; do

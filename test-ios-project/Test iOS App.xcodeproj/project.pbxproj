@@ -378,6 +378,7 @@
 					"$(PROJECT_DIR)/../prebuilt-with-ssl/iOS/include",
 				);
 				INFOPLIST_FILE = "Test iOS App/Test iOS App-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../prebuilt-with-ssl/iOS",
 					"$(inherited)",
@@ -400,6 +401,7 @@
 					"$(PROJECT_DIR)/../prebuilt-with-ssl/iOS/include",
 				);
 				INFOPLIST_FILE = "Test iOS App/Test iOS App-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../prebuilt-with-ssl/iOS",
 					"$(inherited)",
@@ -468,6 +470,7 @@
 				EC5F600819EEEF310059DA34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EC5F600919EEEF310059DA34 /* Build configuration list for PBXNativeTarget "Test iOS AppTests" */ = {
 			isa = XCConfigurationList;
@@ -476,6 +479,7 @@
 				EC5F600B19EEEF310059DA34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

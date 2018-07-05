@@ -16,4 +16,3 @@ SSL_LOCAL_C_INCLUDES := \
   $(LOCAL_PATH)/../../openssl/include \
   $(LOCAL_PATH)/../../openssl \
   $(LOCAL_PATH)/../../openssl/crypto \
-  $(NDK_PATH)/platforms/$(TARGET_PLATFORM)/arch-arm/usr/include
