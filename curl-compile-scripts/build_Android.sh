@@ -86,7 +86,7 @@ if [ ! -x "$CURLPATH/configure" ]; then
 	fi
 fi
 
-export CFLAGS="--sysroot=$SYSROOT -march=$ARCH -mandroid -mthumb"
+export CFLAGS="--sysroot=$SYSROOT -march=$ARCH -mthumb"
 export CPPFLAGS="$CFLAGS -I$TOOLCHAIN/include -DANDROID -DCURL_STATICLIB"
 export LIBS="-lssl -lcrypto"
 export LDFLAGS="-march=$ARCH -L$SCRIPTPATH/obj/local/armeabi-v7a"
