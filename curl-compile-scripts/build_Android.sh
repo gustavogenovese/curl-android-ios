@@ -31,7 +31,7 @@ fi
 
 #Configure OpenSSL
 cd $SSLPATH
-./Configure android no-asm no-shared no-cast no-idea no-camellia no-whirpool
+./Configure android no-asm no-shared no-cast no-idea no-camellia no-whirpool no-hw no-engine
 EXITCODE=$?
 if [ $EXITCODE -ne 0 ]; then
 	echo "Error running the ssl configure program"
@@ -86,7 +86,7 @@ if [ ! -x "$CURLPATH/configure" ]; then
 	fi
 fi
 
-export CFLAGS="--sysroot=$SYSROOT -march=$ARCH -mandroid -mthumb"
+export CFLAGS="--sysroot=$SYSROOT -march=$ARCH -mthumb"
 export CPPFLAGS="$CFLAGS -I$TOOLCHAIN/include -DANDROID -DCURL_STATICLIB"
 export LIBS="-lssl -lcrypto"
 export LDFLAGS="-march=$ARCH -L$SCRIPTPATH/obj/local/armeabi-v7a"
