@@ -56,14 +56,8 @@ CRYPTO_CSOURCES := \
   ec/ec_print.c ec/eck_prn.c ec/ecp_mont.c ec/ecp_nist.c ec/ecp_oct.c \
   ec/ecp_smpl.c ecdh/ech_err.c ecdh/ech_kdf.c ecdh/ech_key.c ecdh/ech_lib.c \
   ecdh/ech_ossl.c ecdsa/ecs_asn1.c ecdsa/ecs_err.c ecdsa/ecs_lib.c \
-  ecdsa/ecs_ossl.c ecdsa/ecs_sign.c ecdsa/ecs_vrf.c engine/eng_all.c \
-  engine/eng_cnf.c engine/eng_ctrl.c engine/eng_dyn.c engine/eng_err.c \
-  engine/eng_fat.c engine/eng_init.c engine/eng_lib.c engine/eng_list.c \
-  engine/eng_pkey.c engine/eng_table.c engine/tb_asnmth.c engine/tb_cipher.c \
-  engine/tb_dh.c engine/tb_digest.c engine/tb_dsa.c engine/tb_ecdh.c \
-  engine/tb_ecdsa.c engine/tb_pkmeth.c engine/tb_rand.c engine/tb_rsa.c \
-  engine/tb_store.c err/err.c err/err_all.c err/err_prn.c evp/bio_b64.c \
-  evp/bio_enc.c evp/bio_md.c evp/bio_ok.c evp/c_all.c evp/c_allc.c evp/c_alld.c\
+  ecdsa/ecs_ossl.c ecdsa/ecs_sign.c ecdsa/ecs_vrf.c err/err.c err/err_all.c err/err_prn.c \
+  evp/bio_b64.c evp/bio_enc.c evp/bio_md.c evp/bio_ok.c evp/c_all.c evp/c_allc.c evp/c_alld.c\
   evp/digest.c evp/e_aes.c evp/e_aes_cbc_hmac_sha1.c \
   evp/e_aes_cbc_hmac_sha256.c evp/e_bf.c evp/e_des.c evp/e_des3.c evp/e_null.c \
   evp/e_old.c evp/e_rc2.c evp/e_rc4.c evp/e_rc4_hmac_md5.c evp/e_rc5.c \
@@ -77,7 +71,7 @@ CRYPTO_CSOURCES := \
   hmac/hm_pmeth.c hmac/hmac.c krb5/krb5_asn.c lhash/lh_stats.c lhash/lhash.c \
   md4/md4_dgst.c md4/md4_one.c md5/md5_dgst.c md5/md5_one.c mem.c mem_clr.c \
   mem_dbg.c modes/cbc128.c modes/ccm128.c modes/cfb128.c modes/ctr128.c \
-  modes/gcm128.c modes/ofb128.c modes/wrap128.c modes/xts128.c o_dir.c o_init.c\
+  modes/gcm128.c modes/ofb128.c modes/wrap128.c modes/xts128.c o_dir.c o_init.c getenv.c \
   o_str.c o_time.c objects/o_names.c objects/obj_dat.c objects/obj_err.c \
   objects/obj_lib.c objects/obj_xref.c ocsp/ocsp_asn.c ocsp/ocsp_cl.c \
   ocsp/ocsp_err.c ocsp/ocsp_ext.c ocsp/ocsp_ht.c ocsp/ocsp_lib.c \
