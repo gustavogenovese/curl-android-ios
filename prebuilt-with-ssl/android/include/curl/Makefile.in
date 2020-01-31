@@ -89,7 +89,7 @@ build_triplet = @build@
 host_triplet = @host@
 subdir = include/curl
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/m4/ax_code_coverage.m4 \
+am__aclocal_m4_deps = $(top_srcdir)/m4/ax_compile_check_sizeof.m4 \
 	$(top_srcdir)/m4/curl-compilers.m4 \
 	$(top_srcdir)/m4/curl-confopts.m4 \
 	$(top_srcdir)/m4/curl-functions.m4 \
@@ -189,6 +189,7 @@ ACLOCAL = @ACLOCAL@
 AMTAR = @AMTAR@
 AM_DEFAULT_VERBOSITY = @AM_DEFAULT_VERBOSITY@
 AR = @AR@
+AR_FLAGS = @AR_FLAGS@
 AS = @AS@
 AUTOCONF = @AUTOCONF@
 AUTOHEADER = @AUTOHEADER@
@@ -199,12 +200,6 @@ CC = @CC@
 CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
 CFLAG_CURL_SYMBOL_HIDING = @CFLAG_CURL_SYMBOL_HIDING@
-CODE_COVERAGE_CFLAGS = @CODE_COVERAGE_CFLAGS@
-CODE_COVERAGE_CPPFLAGS = @CODE_COVERAGE_CPPFLAGS@
-CODE_COVERAGE_CXXFLAGS = @CODE_COVERAGE_CXXFLAGS@
-CODE_COVERAGE_ENABLED = @CODE_COVERAGE_ENABLED@
-CODE_COVERAGE_LDFLAGS = @CODE_COVERAGE_LDFLAGS@
-CODE_COVERAGE_LIBS = @CODE_COVERAGE_LIBS@
 CONFIGURE_OPTIONS = @CONFIGURE_OPTIONS@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
@@ -246,14 +241,15 @@ ENABLE_SHARED = @ENABLE_SHARED@
 ENABLE_STATIC = @ENABLE_STATIC@
 EXEEXT = @EXEEXT@
 FGREP = @FGREP@
+FISH_FUNCTIONS_DIR = @FISH_FUNCTIONS_DIR@
 GCOV = @GCOV@
-GENHTML = @GENHTML@
 GREP = @GREP@
 HAVE_BROTLI = @HAVE_BROTLI@
 HAVE_GNUTLS_SRP = @HAVE_GNUTLS_SRP@
 HAVE_LDAP_SSL = @HAVE_LDAP_SSL@
 HAVE_LIBZ = @HAVE_LIBZ@
 HAVE_OPENSSL_SRP = @HAVE_OPENSSL_SRP@
+HAVE_PROTO_BSDSOCKET_H = @HAVE_PROTO_BSDSOCKET_H@
 IDN_ENABLED = @IDN_ENABLED@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
@@ -314,22 +310,26 @@ STRIP = @STRIP@
 SUPPORT_FEATURES = @SUPPORT_FEATURES@
 SUPPORT_PROTOCOLS = @SUPPORT_PROTOCOLS@
 USE_ARES = @USE_ARES@
-USE_AXTLS = @USE_AXTLS@
-USE_CYASSL = @USE_CYASSL@
-USE_DARWINSSL = @USE_DARWINSSL@
+USE_BEARSSL = @USE_BEARSSL@
 USE_GNUTLS = @USE_GNUTLS@
 USE_GNUTLS_NETTLE = @USE_GNUTLS_NETTLE@
 USE_LIBRTMP = @USE_LIBRTMP@
 USE_LIBSSH = @USE_LIBSSH@
 USE_LIBSSH2 = @USE_LIBSSH2@
 USE_MBEDTLS = @USE_MBEDTLS@
+USE_MESALINK = @USE_MESALINK@
 USE_NGHTTP2 = @USE_NGHTTP2@
+USE_NGHTTP3 = @USE_NGHTTP3@
+USE_NGTCP2 = @USE_NGTCP2@
+USE_NGTCP2_CRYPTO_OPENSSL = @USE_NGTCP2_CRYPTO_OPENSSL@
 USE_NSS = @USE_NSS@
 USE_OPENLDAP = @USE_OPENLDAP@
-USE_POLARSSL = @USE_POLARSSL@
+USE_QUICHE = @USE_QUICHE@
 USE_SCHANNEL = @USE_SCHANNEL@
+USE_SECTRANSP = @USE_SECTRANSP@
 USE_UNIX_SOCKETS = @USE_UNIX_SOCKETS@
 USE_WINDOWS_SSPI = @USE_WINDOWS_SSPI@
+USE_WOLFSSL = @USE_WOLFSSL@
 VERSION = @VERSION@
 VERSIONNUM = @VERSIONNUM@
 ZLIB_LIBS = @ZLIB_LIBS@
@@ -396,7 +396,7 @@ top_srcdir = @top_srcdir@
 #                            | (__| |_| |  _ <| |___
 #                             \___|\___/|_| \_\_____|
 #
-# Copyright (C) 1998 - 2017, Daniel Stenberg, <daniel@haxx.se>, et al.
+# Copyright (C) 1998 - 2019, Daniel Stenberg, <daniel@haxx.se>, et al.
 #
 # This software is licensed as described in the file COPYING, which
 # you should have received as part of this distribution. The terms
@@ -411,9 +411,13 @@ top_srcdir = @top_srcdir@
 #
 ###########################################################################
 pkginclude_HEADERS = \
-	curl.h curlver.h easy.h mprintf.h stdcheaders.h multi.h \
-	typecheck-gcc.h system.h
+  curl.h curlver.h easy.h mprintf.h stdcheaders.h multi.h \
+  typecheck-gcc.h system.h urlapi.h
 
+CHECKSRC = $(CS_$(V))
+CS_0 = @echo "  RUN     " $@;
+CS_1 = 
+CS_ = $(CS_0)
 all: all-am
 
 .SUFFIXES:
@@ -683,7 +687,7 @@ uninstall-am: uninstall-pkgincludeHEADERS
 
 
 checksrc:
-	@@PERL@ $(top_srcdir)/lib/checksrc.pl -D$(top_srcdir)/include/curl $(pkginclude_HEADERS)
+	$(CHECKSRC)@PERL@ $(top_srcdir)/lib/checksrc.pl -D$(top_srcdir)/include/curl $(pkginclude_HEADERS)
 
 # for debug builds, we scan the sources on all regular make invokes
 @CURLDEBUG_TRUE@all-local: checksrc
